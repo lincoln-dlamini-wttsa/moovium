@@ -1,0 +1,25 @@
+### Get favourite movies
+GET http://{{host}}/movies/favourite
+Accept: application/json
+
+###
+GET http://{{host}}/movies/boxoffice
+Accept: application/json
+
+###
+POST http://{{host}}/movies/favourite
+Content-Type: application/json
+
+{
+  "id": "tt11271038",
+  "rank": "9",
+  "title": "Licorice Pizza",
+  "image": "https://m.media-amazon.com/images/M/MV5BZTgxMWJkMzItMzg1YS00NDJiLTljYjctMTc2YzQzZDZjZDAyXkEyXkFqcGdeQXVyODQ2OTIzNDU@._V1_UX128_CR0,3,128,176_AL_.jpg",
+  "weekend": "$880K",
+  "gross": "$9.6M",
+  "weeks": "8"
+}
+
+###
+GET http://{{host}}/movies/search/anaconda
+Accept: application/json

@@ -15,7 +15,6 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 @RegisterRestClient()
 public interface MovieProxy {
-
     @GET
     @Path("/YouTubeTrailer/{apikey}/{videoId}")
     MovieDTO getMovies(@PathParam("videoId") String videoId, @PathParam("apikey") String apikey);
