@@ -22,7 +22,7 @@
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
+        <li><a href="#running-the-project">Running the solution</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
@@ -46,12 +46,10 @@ The main focus is on the following:
 * Implementing the basic CRUD ( CREATE,READ,UPDATE,DELETE ) operations common to Rest APIs
 * Persist data to a data store.
 
-These are just a few concepts to get you started on your way to Rockstar Java Developer 
+These are just a few concepts to get you started on building APIs using Java.  
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
 
 ### Built With
 
@@ -67,134 +65,83 @@ These are the frameworks/libraries we will use to implement this solution.
 <!-- GETTING STARTED -->
 ## Getting Started
 
-Clone the project
+Clone the project from this repo: [Movium GitHub Repo](https://github.com/the-linc/moovium)
 
 ### Prerequisites
 
 This is an example of how to list things you need to use the software and how to install them.
-* npm
+* npm ( version 8 or higher )
   ```sh
   npm install npm@latest -g
   ```
+* SDKMAN ( Use [SDKMAN](https://sdkman.io/install) to install and switch between JDK versions )
 
-### Installation
+  
+* [Install](https://sdkman.io/usage) Java JDK 17
+  ```sh
+  sdk install java 17.0.2-open
+  ```
+  
+* Install Maven
+  ```sh
+  sdk install maven
+  ```
+  
+* Download and install [Docker](https://www.docker.com/get-started)
+ 
+
+
+### Running the solution
 
 _Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Spin up a Mysql instance using docker :
+    ```
+    docker run --name movium-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -e MYSQL_PASSWORD=password -e MYSQL_DATABASE=my-db-movie -e MYSQL_USER=username -p 3306:3306 -d mysql:5
+    ```
+2. Run maven install on project root
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   mvn clean install
    ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
+## Running the application in dev mode
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+You can run your application in dev mode that enables live coding using:
+```shell script
+mvnw compile quarkus:dev
+```
 
+> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
 
+## Packaging and running the application
 
-<!-- USAGE EXAMPLES -->
-## Usage
+The application can be packaged using:
+```shell script
+mvn package
+```
+It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
+Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+If you want to build an _über-jar_, execute the following command:
+```shell script
+mvnw package -Dquarkus.package.type=uber-jar
+```
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
 
+## Creating a native executable
 
+You can create a native executable using:
+```shell script
+mvnw package -Pnative
+```
 
-<!-- ROADMAP -->
-## Roadmap
+Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
+```shell script
+mvnw package -Pnative -Dquarkus.native.container-build=true
+```
 
-- [x] Add Changelog
-- [x] Add back to top links
-- [ ] Add Additional Templates w/ Examples
-- [ ] Add "components" document to easily copy & paste sections of the readme
-- [ ] Multi-language Support
-    - [ ] Chinese
-    - [ ] Spanish
+You can then execute your native executable with: `./target/movium-1.0.0-SNAPSHOT-runner`
 
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- CONTACT -->
-## Contact
-
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
-
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
-
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
-* [Malven's Grid Cheatsheet](https://grid.malven.co/)
-* [Img Shields](https://shields.io)
-* [GitHub Pages](https://pages.github.com)
-* [Font Awesome](https://fontawesome.com)
-* [React Icons](https://react-icons.github.io/react-icons/search)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
-[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
-[product-screenshot]: images/screenshot.png
+If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.
