@@ -37,6 +37,13 @@ public class MovieResource {
     }
 
     @GET
+    @Path("/comingsoon")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getComingSoon(){
+        return Response.ok(movieProxy.getComingSoon(apiKey).items()).build();
+    }
+
+    @GET
     @Path("/search/{title}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response search(@PathParam("title") String title){
