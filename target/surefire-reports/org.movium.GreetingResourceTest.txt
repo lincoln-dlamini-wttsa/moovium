@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: org.movium.GreetingResourceTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 87.651 s - in org.movium.GreetingResourceTest

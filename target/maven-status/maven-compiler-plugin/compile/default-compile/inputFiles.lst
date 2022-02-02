@@ -1,0 +1,12 @@
+/Users/wzore/Documents/repos/moovium/src/main/java/org/movium/model/SearchTitleResponse.java
+/Users/wzore/Documents/repos/moovium/src/main/java/org/movium/proxy/MovieProxy.java
+/Users/wzore/Documents/repos/moovium/src/main/java/org/movium/MovieResource.java
+/Users/wzore/Documents/repos/moovium/src/main/java/org/movium/model/BoxOfficeEntity.java
+/Users/wzore/Documents/repos/moovium/src/main/java/org/movium/model/BoxOfficeDTO.java
+/Users/wzore/Documents/repos/moovium/src/main/java/org/movium/model/MovieDTO.java
+/Users/wzore/Documents/repos/moovium/src/main/java/org/movium/model/ExchangeRateDTO.java
+/Users/wzore/Documents/repos/moovium/src/main/java/org/movium/proxy/ExchangeProxy.java
+/Users/wzore/Documents/repos/moovium/src/main/java/org/movium/model/ConversionRates.java
+/Users/wzore/Documents/repos/moovium/src/main/java/org/movium/model/SearchMovieResponseDTO.java
+/Users/wzore/Documents/repos/moovium/src/main/java/org/movium/ExchangeResource.java
+/Users/wzore/Documents/repos/moovium/src/main/java/org/movium/services/ConversionService.java
