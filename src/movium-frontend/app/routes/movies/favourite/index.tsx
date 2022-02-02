@@ -9,7 +9,7 @@ export default function Index(){
     let favourites = useLoaderData();
     return(
         <div>
-            <p>Favourites</p>
+            <p className="text-xl text-gray-dark tracking-wide">FAVOURITES</p>
             {favourites.map(favourite => (
                 <div key={favourite.id}>
                     <img src={favourite.image} alt="Favourite image" />
