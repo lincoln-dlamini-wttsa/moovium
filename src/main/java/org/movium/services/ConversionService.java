@@ -17,14 +17,14 @@ public class ConversionService {
     private void convertWeekend(double conversionRate, List<BoxOfficeEntity> boxOfficeEntityList) {
         for(BoxOfficeEntity boxOfficeEntity: boxOfficeEntityList){
             String randValue = "";
-            var a = boxOfficeEntity.getWeekend().split("\\$");
-            var b =new String[2];
-            if(a[1].contains("K")){
-                b = a[1].split("K");
+            var removeDollar = boxOfficeEntity.getWeekend().split("\\$");
+            var removeLetter =new String[2];
+            if(removeDollar[1].contains("K")){
+                removeLetter = removeDollar[1].split("K");
             }else {
-                b = a[1].split("M");
+                removeLetter = removeDollar[1].split("M");
             }
-            var dollar = Double.parseDouble(b[0]);
+            var dollar = Double.parseDouble(removeLetter[0]);
             var rand = dollar * conversionRate;
             var randRound = Math.round(rand*100.0)/100.0;
             randValue = "ZAR "+ Double.toString(randRound)+"M";
@@ -36,9 +36,9 @@ public class ConversionService {
     private void convertGross(double conversionRate, List<BoxOfficeEntity> boxOfficeEntityList) {
         for(BoxOfficeEntity boxOfficeEntity: boxOfficeEntityList){
             String randValue = "";
-            var a = boxOfficeEntity.getGross().split("\\$");
-            var b = a[1].split("M");
-            var dollar = Double.parseDouble(b[0]);
+            var removeDollar = boxOfficeEntity.getGross().split("\\$");
+            var removeLetter = removeDollar[1].split("M");
+            var dollar = Double.parseDouble(removeLetter[0]);
             var rand = dollar * conversionRate;
             var randRound = 0.0;
            if(rand > 999.999){
