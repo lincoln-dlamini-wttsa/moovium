@@ -1,5 +1,6 @@
 import { useLoaderData } from "remix"
 import type { LoaderFunction } from "remix"
+import SocialShare from "~/components/socialShare"
 
 
 export let loader:LoaderFunction = () =>{
@@ -16,9 +17,9 @@ export default function BoxOffice(){
                 <div key={movie.id}>
                     <img src={movie.image}></img>
                     <div>{movie.title}</div>
+                    <SocialShare url={movie.image} text="Check this out"/>
                 </div>
             ))}
     </div>
     )
-
 }

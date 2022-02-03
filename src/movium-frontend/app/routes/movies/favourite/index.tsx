@@ -16,7 +16,6 @@ export default function Index(){
                     <div>Title : {favourite.title}</div>
                 </div>
             )
-
             )}
         </div>
     )
