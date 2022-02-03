@@ -1,0 +1,10 @@
+org/movium/proxy/ExchangeProxy.class
+org/movium/model/BoxOfficeEntity.class
+org/movium/model/SearchTitleResponse.class
+org/movium/model/MovieDTO.class
+org/movium/ExchangeResource.class
+org/movium/model/SearchMovieResponseDTO.class
+org/movium/model/BoxOfficeDTO.class
+org/movium/MovieResource.class
+META-INF/panache-archive.marker
+org/movium/proxy/MovieProxy.class
