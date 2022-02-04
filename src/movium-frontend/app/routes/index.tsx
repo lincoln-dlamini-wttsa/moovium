@@ -1,6 +1,7 @@
 import {Link, redirect, useLoaderData} from "remix";
 import type { LoaderFunction } from "remix"
 import { BsPlusSquareFill} from "react-icons/bs";
+import SocialShare from "~/components/socialShare"
 
 export let loader:LoaderFunction = () =>{
   let res = fetch("http://localhost:8080/movies/boxoffice");
@@ -37,6 +38,7 @@ export default function Index() {
                     <p className="mt-2"><b>Weekend:</b> {movie.weekend}</p>
                     <p><b>Gross:</b> {movie.gross}</p>
                     <p><b>Weeks:</b> {movie.weeks}</p>
+                    <SocialShare url={movie.image} text="Check this out"/>
                     </div>
                 </div>
             ))}
