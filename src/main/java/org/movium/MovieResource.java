@@ -89,4 +89,12 @@ public class MovieResource {
         }
         return Response.status(Response.Status.BAD_REQUEST).build();
     }
+
+    @GET
+    @Path("/title/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getMovieTitle(@PathParam("id") String id){
+        var movie = movieProxy.getMovieTitle(apiKey, id);
+        return Response.ok(movie).build();
+    }
 }

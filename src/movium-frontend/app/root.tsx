@@ -14,7 +14,6 @@ import {
 import { HiOutlineFilm, 
   HiOutlineTicket, 
   HiOutlineHome, 
-  HiOutlineClock, 
   HiOutlineUsers,  
   HiOutlineUserGroup, 
   HiOutlinePlay, 
@@ -113,10 +112,6 @@ function Layout({ children }) {
               <Link className=" text-gray hover:text-gray-dark active:text-gray-dark focus:text-gray-dark" to="/movies/boxoffice">Box Office</Link>
             </li>
             <li className="flex flex-row">
-              <HiOutlineClock className="h-6 w-6 mr-2 stroke-orange" />
-              <Link className=" text-gray hover:text-gray-dark active:text-gray-dark focus:text-gray-dark" to="/movies/comingsoon">Coming Soon</Link>
-            </li>
-            <li className="flex flex-row">
               <HiOutlineHeart className="h-6 w-6 mr-2 stroke-orange" />
               <Link className=" text-gray hover:text-gray-dark active:text-gray-dark focus:text-gray-dark" to="/movies/favourite">Favourites</Link>
             </li>
@@ -191,11 +186,6 @@ function Layout({ children }) {
                 <h4 className="text-sm text-gray-dark font-medium">
                  {favourite.title}
                 </h4>
-                <p className="text-xs pb-7">Subtitle</p>
-                <p className="flex flex-row text-sm">
-                  <SiImdb className="h-6 w-6 mr-2" />
-                  7.5
-                </p>
               </div>
             </li>
           </ul>
@@ -203,7 +193,7 @@ function Layout({ children }) {
           ))}
 
           <div className="pt-6 w-11/12">
-          <Link to="/" className="border border-solid rounded-lg p-3 text-sm">See More</Link>
+          <Link to="/movies/favourite" className="border border-solid rounded-lg p-3 text-sm">See More</Link>
           </div>
         </div>
       </div>

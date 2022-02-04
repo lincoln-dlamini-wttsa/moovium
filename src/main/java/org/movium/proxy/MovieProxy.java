@@ -4,6 +4,7 @@ import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 import org.movium.model.BoxOfficeDTO;
 import org.movium.model.ComingSoonDTO;
 import org.movium.model.MovieDTO;
+import org.movium.model.MovieTitleDTO;
 import org.movium.model.SearchTitleResponse;
 
 import javax.ws.rs.GET;
@@ -31,4 +32,8 @@ public interface MovieProxy {
     @GET
     @Path("/SearchTitle/{apikey}/{title}")
     SearchTitleResponse searchTitle(@PathParam("title")String title,@PathParam("apikey") String apikey);
+
+    @GET
+    @Path("/Title/{apikey}/{id}")
+    MovieTitleDTO getMovieTitle(@PathParam("apikey") String apikey, @PathParam("id") String id);
 }

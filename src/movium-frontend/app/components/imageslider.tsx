@@ -1,51 +1,38 @@
-import { Component } from "react";
-import "slick-carousel/slick/slick.css";  
-import "slick-carousel/slick/slick-theme.css";  
-import  Slider from "react-slick";  
+import SimpleImageSlider from "react-simple-image-slider";
+import { useLoaderData } from "remix"
+import type { LoaderFunction } from "remix"
+import { ImageSliderNavStyle } from "react-simple-image-slider/dist/ImageSliderNavigation";
 
+export let loader:LoaderFunction = async ()  =>{
+    let res = await fetch("http://localhost:8080/movies/comingsoon");
+
+    var response =  res.json();
+
+    return response;
+}
+
+export default function ImageSlider(){
+
+    let comingSoon = useLoaderData();
+
+    var images:Object [] = [];
+
+    for (let i = 0; i < comingSoon.length; i++) {
+         images.push({url:comingSoon[i].image});
+       }
+
+    return(
+
+
+
+        <SimpleImageSlider
+          width={906}
+          height={350}
+          images={images}
+          showBullets={true}
+          showNavs={true}
+        />
  
-export class ImageSlider extends Component {  
-    render() {  
-        var settings = {  
-          dots: true,  
-          infinite: true,  
-          speed: 500,  
-          centerMode: true,  
-          slidesToShow: 1,  
-          slidesToScroll: 1  
-          };  
-          return (  
-            <div>  
-            <div>        
-            <div >        
-            <div>        
-            Slick Carousel In React Application     
-            </div>        
-            </div>    
-            </div>  
-            <Slider {...settings} >  
-              <div className=" w-1/3">  
-              <img  className="img" src= {'/images/backdrop.jpg'}/>  
-              </div>  
-              <div className=" w-96">   
-              <img src= {'/images/large-image.jpg'} className=" h-72"/>  
-              </div>  
-              <div className=" w-1/3">   
-              <img  className=" h-72" src= {'/images/backdrop.jpg'}/>  
-              </div>  
-              <div className=" w-96">    
-              <img  className=" h-72" src= {'/images/large-image.jpg'}/>  
-              </div >  
-              <div className=" w-1/3">    
-              <img  className=" h-72" src= {'/images/backdrop.jpg'}/>  
-              </div>  
-              <div className=" w-1/3">    
-              <img  className=" h-72" src= {'/images/large-image.jpg'}/>  
-              </div>  
-            </Slider>  
-            </div>  
-          );  
-        }  
-      }  
-  
-export default ImageSlider  
+    )
+
+}
