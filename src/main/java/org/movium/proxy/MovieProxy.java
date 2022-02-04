@@ -2,6 +2,7 @@ package org.movium.proxy;
 
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 import org.movium.model.BoxOfficeDTO;
+import org.movium.model.ComingSoonDTO;
 import org.movium.model.MovieDTO;
 import org.movium.model.SearchTitleResponse;
 
@@ -22,6 +23,10 @@ public interface MovieProxy {
     @GET
     @Path("/BoxOffice/{apikey}")
     BoxOfficeDTO getBoxOffice(@PathParam("apikey") String apikey);
+
+    @GET
+    @Path("/ComingSoon/{apikey}")
+    ComingSoonDTO getComingSoon(@PathParam("apikey") String apikey);
 
     @GET
     @Path("/SearchTitle/{apikey}/{title}")

@@ -145,3 +145,69 @@ mvn package -Pnative -Dquarkus.native.container-build=true
 You can then execute your native executable with: `./target/movium-1.0.0-SNAPSHOT-runner`
 
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.
+
+
+
+### Starting and Configuring the Keycloak Server
+
+Just run the following command:
+
+```shell script
+docker run --name keycloak -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin -p 8180:8080 -p 8543:8443 quay.io/keycloak/keycloak:12.0.4
+```
+After its done You should be able to access your Keycloak Server at http://localhost:8180/auth/
+
+Log in as the admin user to access the Keycloak Administration Console. Username should be admin and password admin.
+
+Import the realm configuration file to create a new muvium realm. file located at `/config/muvium-realm.json`
+
+### Testing the Application
+
+## There's two security contraints
+
+Roles
+user and Admin
+we have created two users 
+username and password
+---------------------
+linc password assigned to Admin role
+anelemzinyati password assigned to User and Admin role
+
+first we need to install jq tool
+```shell script
+brew install jq 
+```
+
+if you dont have brew installed  run this cmd - ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null 2> /dev/null
+
+These endpoints are protected and can only be accessed if a client is sending a bearer token along with the request,
+
+/movies/trailer/{videoId}
+/movies/boxoffice
+/movies/search/{title}
+/movies/favourite
+/favourite/{id}
+
+The application is using bearer token authorization and the first thing to do is obtain an access token from the Keycloak Server in order to access the application resources:
+
+```shell script
+export access_token=$(\
+    curl --insecure -X POST https://localhost:8543/auth/realms/muvium/protocol/openid-connect/token \
+    --user backend-service:832421a3-d8f2-439d-b0e1-7dbc68151087 \
+    -H 'content-type: application/x-www-form-urlencoded' \
+    -d 'username=anelemzinyati&password=password&grant_type=password' | jq --raw-output '.access_token' \
+ )
+ ```
+
+The example above obtains an access token for user anelemzinyati.
+
+Only users with role of user  is allowed to access the http://localhost:8080/movies/boxoffice endpoint which basically returns a JSON payload with a list of movies.
+
+```shell script
+curl -v -X GET \
+http://localhost:8080/movies/boxoffice \
+-H "Authorization: Bearer "$access_token
+ ```
+
+
+or use postman to test copy the token from environment vars 
