@@ -1,5 +1,4 @@
 import {
-  ActionFunction,
   Form,
   Link,
   Links,
@@ -8,20 +7,19 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  useActionData,
   useLoaderData 
 } from "remix";
-import { HiOutlineFilm, 
-  HiOutlineTicket, 
+import {
   HiOutlineHome, 
   HiOutlineUsers,  
-  HiOutlineUserGroup, 
+  HiOutlineUserGroup,
+  HiOutlineClock, 
   HiOutlinePlay, 
   HiOutlineLogout, 
   HiOutlineCog,
-  HiOutlineHeart 
+  HiOutlineHeart,
+  HiOutlineSearch 
 } from "react-icons/hi";
-import { SiImdb} from "react-icons/si";
 
 import type { MetaFunction, LoaderFunction } from "remix";
 import moviumStyles from "./movium.css";
@@ -39,21 +37,21 @@ export const meta: MetaFunction = () => {
   return { title: "Movium" };
 };
 
-export let loader:LoaderFunction = () =>{
-  let res = fetch("http://localhost:8080/movies/favourite");
-  return res;
-}
+export let loader:LoaderFunction = async ({request}) =>{
+  let favourites = await fetch("http://localhost:8080/movies/favourite");
 
-export const action: ActionFunction = async ({ request }) => {
-  const form = await request.formData()
-  console.log(form);
-  const title = form.get("title")
-  console.log("TITLE",title);
-  let res = fetch(`http://localhost:8080/movies/search/${title}`);
+  // let url = await request.formData();
+  // let title = url.get("title");
+
+  // let search = await fetch(`http://localhost:8080/movies/search/${title}`);
+
+ 
+
+  // let favouritesData = await favourites.json();
+  // let searchData = await search.json();
   
-  return res;
-};
-
+  return favourites;
+}
 
 
 export default function App() {
@@ -86,10 +84,11 @@ function Document({ children}) {
 }
 
 function Layout({ children }) {
-  let favourites = useLoaderData();
-  let searchResults = useActionData();
+  let movielist = useLoaderData();
+  var limited = movielist.slice(0, 3);
+  
   return (
-    <>
+   
       <div className="grid grid-cols-5 divide-x text-gray-light">
         <div className="col-start-1 col-span-1 px-4">
           <Link to="/">
@@ -104,12 +103,8 @@ function Layout({ children }) {
               <Link className=" text-gray hover:text-gray-dark active:text-gray-dark focus:text-gray-dark" to="/">Home</Link>
             </li>
             <li className="flex flex-row">
-              <HiOutlineFilm className="h-6 w-6 mr-2 stroke-orange" />
-              <Link className=" text-gray hover:text-gray-dark active:text-gray-dark focus:text-gray-dark" to="/movies/moviedetail">Movies</Link>
-            </li>
-            <li className="flex flex-row">
-              <HiOutlineTicket className="h-6 w-6 mr-2 stroke-orange" />
-              <Link className=" text-gray hover:text-gray-dark active:text-gray-dark focus:text-gray-dark" to="/movies/boxoffice">Box Office</Link>
+            <HiOutlineClock className="h-6 w-6 mr-2 stroke-orange" />
+              <Link className=" text-gray hover:text-gray-dark active:text-gray-dark focus:text-gray-dark" to="/movies/comingsoon">Coming Soon</Link>
             </li>
             <li className="flex flex-row">
               <HiOutlineHeart className="h-6 w-6 mr-2 stroke-orange" />
@@ -150,9 +145,10 @@ function Layout({ children }) {
 
         <div className="col-start-2 col-span-3 p-12">{children}</div>
 
-        <div className="col-start-5 col-span-1 py-12 px-8">
+    <div className="col-start-5 col-span-1 py-12 px-8">
 
         <Form method="get" className="py-5">
+        <fieldset>
           <input
             type="text"
             name="title"
@@ -163,23 +159,31 @@ function Layout({ children }) {
  
         <button
           type="submit"
-          className="border border-solid rounded-lg p-3 text-sm"
-        >
+          className="border border-solid rounded-lg p-3 text-sm">
           Search
         </button>
+        </fieldset>
       </Form>
+
+      {/* {movielist.searchData.map(search => (
+        <div key={search.id}>
+          <p className="text-sm text-gray-dark font-medium">{search.title}</p>
+        </div>
+      ))} */}
+
 
           <h4 className="pt-8 pb-4 text-gray-dark font-medium text-lg">
             Favourites
           </h4>
-          {favourites.map(favourite => (
+
+          {limited.map(favourite => (
           <div key={favourite.id}>
           <ul className="flex flex-col space-y-6 text-gray">
-            <li className="flex flex-row">
+            <li className="flex flex-row pb-5">
               <Link to="/">
                 <img
                   src={favourite.image}
-                  className="border border-solid rounded-lg w-20 h-24"
+                  className="rounded-lg w-20 h-24"
                 />
               </Link>
               <div className="flex flex-col pl-3">
@@ -191,13 +195,17 @@ function Layout({ children }) {
           </ul>
           </div>
           ))}
+      
 
-          <div className="pt-6 w-11/12">
-          <Link to="/movies/favourite" className="border border-solid rounded-lg p-3 text-sm">See More</Link>
-          </div>
+          <Link to="/movies/favourite" className="">
+          <button
+          type="submit"
+          className="rounded-lg p-3 w-11/12 text-sm bg-orange">
+          <p className=" text-white">See More</p>
+        </button>
+        </Link>
+
         </div>
-      </div>
-    </>
+        </div>
   );
-  
 }
