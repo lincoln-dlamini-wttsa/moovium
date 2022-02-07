@@ -89,13 +89,27 @@ Clone the project from this repo: [Movium GitHub Repo](https://github.com/the-li
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
+Install the following 
 * npm ( version 8 or higher )
   ```sh
   npm install npm@latest -g
   ```
 * SDKMAN ( Use [SDKMAN](https://sdkman.io/install) to install and switch between JDK versions )
 
+###SDKMAN windows installation
+
+* Download and install [7-zip](https://www.7-zip.org/)
+
+* Create symbolic link to 7-zip ( Using Git Bash as Administrator)
+    ```sh
+    ln -s /c/Program\ Files/7-Zip/7z.exe /c/Program\ Files/Git/mingw64/bin/zip.exe
+    ```
+* Install SDKman
+    ```
+    curl -s "https://get.sdkman.io" | bash
+  
+    source "$HOME/.sdkman/bin/sdkman-init.sh"
+    ```
 
 * [Install](https://sdkman.io/usage) Java JDK 17
   ```sh
