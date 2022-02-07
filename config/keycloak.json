@@ -1,0 +1,12 @@
+{
+  "realm": "muvium",
+  "auth-server-url": "http://localhost:8180/auth/",
+  "ssl-required": "external",
+  "resource": "backend-service",
+  "verify-token-audience": true,
+  "credentials": {
+    "secret": "832421a3-d8f2-439d-b0e1-7dbc68151087"
+  },
+  "confidential-port": 0,
+  "policy-enforcer": {}
+}

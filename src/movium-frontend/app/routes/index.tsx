@@ -2,6 +2,8 @@ import {ActionFunction, Form, json, Link, useLoaderData} from "remix";
 import type { LoaderFunction } from "remix"
 import { BsPlusSquareFill} from "react-icons/bs";
 import ImageSlider from "~/components/imageslider";
+import SocialShare from "~/components/socialShare"
+
 
 export let loader:LoaderFunction = async () =>{
   let res = await fetch("http://localhost:8080/movies/boxoffice");
@@ -86,6 +88,7 @@ export default function Index() {
                 <p>
                   <b>Weeks:</b> {movie.weeks}
                 </p>
+                 <SocialShare url={movie.image} text="Check this out"/>
               </div>
             </Link>
           </div>
