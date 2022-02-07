@@ -103,6 +103,7 @@ This is an example of how to list things you need to use the software and how to
   ```
 
 * Download and install [Docker](https://www.docker.com/get-started)
+* Download and install  [GIT](https://git-scm.com/downloads)
 
 ### Running the solution
 
